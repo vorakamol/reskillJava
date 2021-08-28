@@ -76,7 +76,7 @@ class RegisterBusinessTest {
 
     @Test
     @DisplayName("ไม่สามารถบันทึก speaker")
-    public void testRegisterWithCantSaveSpeaker() {
+    public void case05() {
         RegisterBusiness registerBusiness = new RegisterBusiness();
         try {
             Speaker speaker = new Speaker();
@@ -93,7 +93,7 @@ class RegisterBusinessTest {
 
     @Test
     @DisplayName("สามารถบันทึกข้อมูลได้")
-    public void case07() {
+    public void case06() {
         RegisterBusiness registerBusiness = new RegisterBusiness();
         Speaker speaker = new Speaker();
         speaker.setFirstName("jan");

@@ -32,7 +32,7 @@ class RegisterBusinessTest {
         RegisterBusiness registerBusiness = new RegisterBusiness();
         try {
             Speaker speaker = new Speaker();
-            speaker.setFirstName("jan");
+            speaker.setFirstName("aom");
             registerBusiness.register(null, speaker);
         } catch (ArgumentNullException e) {
             if(!e.getMessage().equals("Last name is required.")) {
@@ -47,8 +47,8 @@ class RegisterBusinessTest {
         RegisterBusiness registerBusiness = new RegisterBusiness();
         try {
             Speaker speaker = new Speaker();
-            speaker.setFirstName("jan");
-            speaker.setLastName("jan");
+            speaker.setFirstName("aom");
+            speaker.setLastName("chin");
             registerBusiness.register(null, speaker);
         } catch (ArgumentNullException e) {
             if(!e.getMessage().equals("Email is required.")) {
@@ -63,12 +63,31 @@ class RegisterBusinessTest {
         RegisterBusiness registerBusiness = new RegisterBusiness();
         try {
             Speaker speaker = new Speaker();
-            speaker.setFirstName("jan");
-            speaker.setLastName("jan");
-            speaker.setEmail("janus");
+            speaker.setFirstName("aom");
+            speaker.setLastName("chin");
+            speaker.setEmail("aom.chin@oo-course.com");
             registerBusiness.register(null, speaker);
-            fail();
-        } catch (DomainEmailInvalidException e) {
+        } catch (SpeakerDoesntMeetRequirementsException e) {
+            if(!e.getMessage().equals("Speaker doesn't meet our standard rules.")) {
+                fail();
+            }
+        }
+    }
+
+    @Test
+    @DisplayName("ไม่สามารถบันทึก speaker")
+    public void testRegisterWithCantSaveSpeaker() {
+        RegisterBusiness registerBusiness = new RegisterBusiness();
+        try {
+            Speaker speaker = new Speaker();
+            speaker.setFirstName("aom");
+            speaker.setLastName("chin");
+            speaker.setEmail("aom.chin@live.com");
+            registerBusiness.register(null, speaker);
+        } catch (SaveSpeakerException e) {
+            if(!e.getMessage().equals("Can't save a speaker.")) {
+                fail();
+            }
         }
     }
 
